@@ -3,9 +3,6 @@ import bcrypt from 'bcrypt';
 import bluebird from 'bluebird';
 const salt = bcrypt.genSaltSync(10);
 
-// create the connection, specify bluebird as Promise
-
-
 
 const hashPassword = (userPassword) => {
     const hashPassword = bcrypt.hashSync(userPassword, salt);
@@ -88,7 +85,7 @@ const updateUserInfor = async (email, username, id) => {
             'UPDATE users SET email = ?, username = ? WHERE id = ?', [email, username, id]
         );
         return rows;
-        //console.log(">> check rows:", rows);
+
     } catch (error) {
 
         console.log(">>Check err:", error)
