@@ -18,7 +18,7 @@ const createNewUser = async (email, password, username) => {
     });
     let hashPass = hashPassword(password);
     const [rows, fields] = await connection.execute(
-        'insert into users(email,password,username) values(?,?,?)', [email, hashPass, username]
+        'insert into user(email,password,username) values(?,?,?)', [email, hashPass, username]
     );
 
 }
@@ -31,7 +31,7 @@ const getUserList = async () => {
     });
     try {
         const [rows, fields] = await connection.execute(
-            'SELECT * FROM users'
+            'SELECT * FROM user'
         );
         return rows;
     } catch (error) {
@@ -47,7 +47,7 @@ const deleteUser = async (id) => {
     });
     try {
         const [rows, fields] = await connection.execute(
-            'DELETE FROM users WHERE id =?', [id]
+            'DELETE FROM user WHERE id =?', [id]
         );
         return rows;
     } catch (error) {
@@ -65,7 +65,7 @@ const getUserById = async (id) => {
     });
     try {
         const [rows, fields] = await connection.execute(
-            'SELECT * FROM users WHERE id =?', [id]
+            'SELECT * FROM user WHERE id =?', [id]
         );
         return rows;
     } catch (error) {
@@ -82,7 +82,7 @@ const updateUserInfor = async (email, username, id) => {
     });
     try {
         const [rows, fields] = await connection.execute(
-            'UPDATE users SET email = ?, username = ? WHERE id = ?', [email, username, id]
+            'UPDATE user SET email = ?, username = ? WHERE id = ?', [email, username, id]
         );
         return rows;
 
