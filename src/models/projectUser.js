@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Project_User.init({
-    projectId: DataTypes.STRING,
-    userId: DataTypes.STRING
+    projectId: DataTypes.INTEGER,
+    userId: DataTypes.INTEGER
 
   }, {
     sequelize,

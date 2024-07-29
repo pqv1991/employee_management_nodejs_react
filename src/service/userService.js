@@ -1,8 +1,10 @@
 import mysql from 'mysql2/promise';
-import bcrypt from 'bcrypt';
+
 import bluebird from 'bluebird';
 import db from '../models';
 import { where } from 'sequelize/lib/sequelize';
+import { raw } from 'body-parser';
+import bcrypt from 'bcrypt';
 const salt = bcrypt.genSaltSync(10);
 
 
@@ -27,6 +29,22 @@ const createNewUser = async (email, password, username) => {
 
 }
 const getUserList = async () => {
+    //test relationship
+    let newUser = await db.User.findOne({
+        where: { id: 1 },
+        attributes: ['id', 'username', 'email'],
+        include: { model: db.Group, attributes: ['name', 'description'] },
+        raw: true,
+        nest: true
+    });
+
+    let roles = await db.Role.findAll({
+        include: { model: db.Group, where: { id: 1 } },
+        raw: true,
+        nest: true
+    });
+    console.log(">> Check new User:", newUser);
+    console.log(">> Check new Role:", roles);
     // const connection = await mysql.createConnection({
     //     host: 'localhost',
     //     user: 'root',

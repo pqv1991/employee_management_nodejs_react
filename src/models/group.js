@@ -10,6 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      Group.hasMany(models.User);
+      Group.belongsToMany(models.Role, { through: 'Group_Role' });
       // define association here
     }
   };
